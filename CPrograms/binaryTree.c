@@ -51,11 +51,19 @@ void inorder(NODE* root){
 	}
 }
 
+void preorder(NODE* root){
+	if(root!=NULL){
+		printf("%d ",root->data);
+		preorder(root->lchild);
+		preorder(root->rchild);
+	}
+}
+
 int main(){
 	NODE* root=NULL;
 	int ch=0,val;
 	while(ch<6){
-		printf("\nEnter \n1.Insert\n2.PreOrder\n6.Exit");
+		printf("\nEnter \n1.Insert\n2.InOrder\n3.PreOrder\n6.Exit ");
 		scanf(" %d",&ch);
 		switch(ch){
 
@@ -68,6 +76,8 @@ int main(){
 				break;
 
 			case 2:	inorder(root);
+				break;
+			case 3: preorder(root);
 				break;
 		}
 	}
