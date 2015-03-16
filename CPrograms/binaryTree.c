@@ -59,6 +59,39 @@ void preorder(NODE* root){
 	}
 }
 
+NODE* minValNode(NODE* node){
+	NODE* curr=node;
+	while(curr->lchild!=NULL)
+		curr=curr->lchild;
+	return curr;
+}
+
+NODE* deleteVal(NODE* root, int val){
+	if(root==NULL)
+		return root;
+	if(root->data < val)
+		root->rchild = deleteVal(root->rchild,val);
+	else if(root->data >val)
+		root->lchild = deleteVal(root->lchild,val);
+	else{
+		if(root->lchild==NULL){
+			NODE* temp = root->rchild;
+			free(root);
+			return temp;
+		}
+		else if(root->rchild==NULL){
+			NODE* temp = root->lchild;
+			free(root);
+			return temp;
+		}
+		
+		NODE* temp = minValNode(root->rchild);
+		root->data=temp->data;
+		root->rchild=deleteVal(root->right,temp->data);
+	}
+	return root;
+}
+
 int main(){
 	NODE* root=NULL;
 	int ch=0,val;
