@@ -96,10 +96,9 @@ int main(){
 	NODE* root=NULL;
 	int ch=0,val;
 	while(ch<6){
-		printf("\nEnter \n1.Insert\n2.InOrder\n3.PreOrder\n6.Exit ");
+		printf("\nEnter \n1.Insert\n2.InOrder\n3.PreOrder\n4.Delete\n6.Exit ");
 		scanf(" %d",&ch);
 		switch(ch){
-
 			case 1: printf("\nEnter Value: ");
 				scanf("%d",&val);
 				if(root==NULL)
@@ -110,7 +109,13 @@ int main(){
 
 			case 2:	inorder(root);
 				break;
+				
 			case 3: preorder(root);
+				break;
+				
+			case 4: printf("\nEnter Value: ");
+				scanf("%d",&val);
+				root = deleteVal(root, val);
 				break;
 		}
 	}
