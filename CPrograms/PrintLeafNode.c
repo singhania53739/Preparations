@@ -9,6 +9,8 @@ struct node* right;
 
 typedef struct node NODE;
 
+
+
 NODE* createNode(int data){
 
 NODE* temp =(NODE*)malloc(sizeof(NODE*));
