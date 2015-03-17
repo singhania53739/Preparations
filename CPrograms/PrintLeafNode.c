@@ -76,3 +76,12 @@ NODE* deleteVal(NODE* root,int val){
   }
   return root;
 }
+
+void printLeaf(NODE* root){
+  if(root!=NULL){
+    printLeaf(root->left);
+    if(root->left==NULL && root->right==NULL)
+      printf(" %d",root->data);
+    printleaf(root->right);
+  }
+}
