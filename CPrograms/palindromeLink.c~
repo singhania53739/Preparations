@@ -1,0 +1,48 @@
+#include<stdio.h>
+#include<malloc.h>
+
+struct node{
+	int data;
+	struct node* next;
+};
+
+typedef struct node NODE;
+
+NODE* createNode(int val){
+	NODE* temp = (NODE*)malloc(sizeof(NODE*));
+	temp->data=val;
+	temp->next=NULL;
+	return temp;
+}
+
+NODE* createList(){
+	int i,n,val;
+	NODE* head=NULL,*p;
+	printf("\nEnter the size of List ");
+	scanf("%d",&n);
+	for(i=0;i<n;i++){
+		printf("\nEnter the value: ");
+		scanf("%d",&val);
+			if(head==NULL){
+				head=createNode(val);
+				p=head;
+			}
+			else{
+				p=p->next;
+				p=createNode(val);
+			}
+	}
+	return head;
+}
+
+void printList(NODE* node){
+	while(node!=NULL){
+		printf("%d ",node->data);
+		node=node->next;
+	}
+}
+
+int main(){
+NODE* head=createList();
+printList(head);
+}

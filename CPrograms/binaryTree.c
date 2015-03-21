@@ -59,6 +59,7 @@ void preorder(NODE* root){
 	}
 }
 
+<<<<<<< HEAD
 void postorder(NODE* root){
 
 	if(root!=NULL){
@@ -68,6 +69,8 @@ void postorder(NODE* root){
 	}
 
 }
+=======
+>>>>>>> 4b3772d3a2528d495cefdbdf9d6c536075487ae4
 NODE* minValNode(NODE* node){
 	NODE* curr=node;
 	while(curr->lchild!=NULL)
@@ -96,7 +99,11 @@ NODE* deleteVal(NODE* root, int val){
 		
 		NODE* temp = minValNode(root->rchild);
 		root->data=temp->data;
+<<<<<<< HEAD
 		root->rchild=deleteVal(root->rchild,temp->data);
+=======
+		root->rchild=deleteVal(root->right,temp->data);
+>>>>>>> 4b3772d3a2528d495cefdbdf9d6c536075487ae4
 	}
 	return root;
 }
