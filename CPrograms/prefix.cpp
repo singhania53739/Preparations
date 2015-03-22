@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 #include<string>
+#include<cstring>
 using namespace std;
 
 void prefixString(vector<string> v1){
@@ -11,13 +12,20 @@ void prefixString(vector<string> v1){
 			if(prefix[j]==v1[i][j])
 				j++;
 			else{
-				for(;j<v1[i].size();j++)
-					prefix[j]='\0';
+				break;
 			}
 		}
-	}
+		if(j>0) {
 
-cout<<"\nPrefix is: "<<prefix;
+			cout << "\n shivaa" << prefix << "\n";
+			prefix = prefix.substr(0,j);
+			cout << "\n shivaa" << prefix << "\n";
+		} else {
+			prefix = "";
+		}
+
+	}
+cout<<"\nPrefix is: "<<prefix<<"\n Lengthof str: "<<prefix.length()<<"\nSize: "<<prefix.size();
 
 }
 
