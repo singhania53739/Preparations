@@ -59,21 +59,28 @@ int height(NODE* root){
 	return rheight+1;
 }
 
-void levelPrint(NODE* root,int level){
+void levelPrint(NODE* root,int level,int flag){
 	if(root==NULL)
 		return;
 	if(level==1)
 		printf(" %d",root->data);
 	else if(level>1){
-		levelPrint(root->left,level-1);
-		levelPrint(root->right,level-1)
+		if(flag==1){
+			levelPrint(root->left,level-1,flag);
+			levelPrint(root->right,level-1,flag);
+		}else if(flag==-1){
+			levelPrint(root->right,level-1,flag);
+			levelPrint(root->left,level-1,flag);
+		}
 	}
 }
 
 void levelOrder(NODE* root){
-	int i,h=height(root);
-	for(i=1;i<=h;i++)
-		levelPrint(root,i);
+	int i,h=height(root),flag=1;
+	for(i=1;i<=h;i++){
+		levelPrint(root,i,flag);
+		flag=-flag;
+	}
 }
 
 int main(){
