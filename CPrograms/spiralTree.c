@@ -20,13 +20,15 @@ NODE* createNode(int val){
 int curr=0,pos=0;
 
 NODE* createTree(int pre[],int post[],int size){
-	NODE* root=createNode(pre[pos]);
 	int i;
-	for(i=0;i<size;i++){
-		if(pre[pos]==post[i])
+	NODE* root=createNode(pre[pos]);
+
+	for(i=0;i<size;i++)
+		if(post[i]==pre[pos])
 			break;
-	}
+
 	pos++;
+
 	if(i!=curr){
 		root->left=createTree(pre,post,size);
 		root->right=createTree(pre,post,size);
@@ -45,6 +47,35 @@ void inorder(NODE* root){
 	}
 }
 
+int height(NODE* root){
+	if(root==NULL)
+		return 0;
+
+	int lheight=height(root->left);
+	int rheight=height(root->right);
+
+	if(lheight>rheight)
+		return lheight+1;
+	return rheight+1;
+}
+
+void levelPrint(NODE* root,int level){
+	if(root==NULL)
+		return;
+	if(level==1)
+		printf(" %d",root->data);
+	else if(level>1){
+		levelPrint(root->left,level-1);
+		levelPrint(root->right,level-1)
+	}
+}
+
+void levelOrder(NODE* root){
+	int i,h=height(root);
+	for(i=1;i<=h;i++)
+		levelPrint(root,i);
+}
+
 int main(){
 	int n,i;
 	printf("\nEnter no of elements: ");
@@ -61,4 +92,6 @@ int main(){
 	}
 	NODE* root=createTree(pre,post,n);
 	inorder(root);
+	printf("\nheight is: %d\n",height(root));
+	levelOrder(root);
 }
