@@ -65,3 +65,11 @@ void levelOrder(NODE* root){
   for(i=1;i<=h;i++)
     levelOrderPrint(root,i);
 }
+
+void main(){
+  int pre[9]={1,2,4,8,9,5,3,6,7};
+	int post[9]={8,9,4,5,2,6,7,3,1};
+	NODE* root=createTree(pre,post,9);
+	levelOrder(root);
+	
+}
