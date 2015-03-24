@@ -59,3 +59,9 @@ else if(level>1){
   levelOrderPrint(root->right,level-1);
 }
 }
+
+void levelOrder(NODE* root){
+  int i,h=height(root);
+  for(i=1;i<=h;i++)
+    levelOrderPrint(root,i);
+}
