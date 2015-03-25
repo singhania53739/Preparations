@@ -7,10 +7,17 @@ struct node* left;
 struct node* right;
 };
 
+struct queue{
+	int data;
+	struct queue *next;
+};
+
 typedef struct node NODE;
+typedef struct queue QUEUE;
 
 NODE* createNode(int val){
 NODE* temp=(NODE*)malloc(sizeof(NODE*));
+temp->data=val;
 temp->left=NULL;
 temp->right=NULL;
 return temp;
@@ -65,11 +72,38 @@ void levelOrder(NODE* root){
   for(i=1;i<=h;i++)
     levelOrderPrint(root,i);
 }
+QUEUE* createQueueNode(int val){
+	QUEUE* temp = (QUEUE*)malloc(sizeof(QUEUE*));
+	temp->data=val;
+	temp->next=NULL;
+	return temp;
+}
+QUEUE* enqueue(QUEUE* top,int val){
+	if(top==NULL)
+		top=createNode(val);
+	else{
+		QUEUE* temp=top;
+		while(temp->next!=NULL)
+			temp=temp->next;
+		temp->next=createQUEUE(val);
+	}
+	return top;
+}
+
+int dequeue(QUEUE *top){
+	if(top!=NULL){
+		QUEUE* temp=top;
+		top=top->next;
+		int val=temp->data;
+		free(temp);
+		return val;
+	}
+	return -999;
+}
 
 void main(){
   int pre[9]={1,2,4,8,9,5,3,6,7};
 	int post[9]={8,9,4,5,2,6,7,3,1};
 	NODE* root=createTree(pre,post,9);
 	levelOrder(root);
-	
 }
