@@ -27,7 +27,7 @@ NODE* createNode(int val){
 
 int curr=0,pos=0;
 NODE* createTree(int pre[],int post[],int size){
-	NODE* root=pre[pos];
+	NODE* root=createNode(pre[pos]);
 	int i;
 	for(i=0;i<size;i++)
 		if(pre[pos]==post[i])
@@ -77,12 +77,13 @@ void levelOrder(NODE* root){
 QUEUE* createQueueNode(NODE* node){
 	QUEUE* temp = (QUEUE*)malloc(sizeof(QUEUE*));
 	temp->node=node;
+//	printf("\n%d",node->data);
 	temp->next=NULL;
 	return temp;
 }
 QUEUE* enqueue(QUEUE* top,NODE* node){
 	if(top==NULL)
-		top=createNode(node);
+		top=createQueueNode(node);
 	else{
 		QUEUE* temp=top;
 		while(temp->next!=NULL)
@@ -92,26 +93,27 @@ QUEUE* enqueue(QUEUE* top,NODE* node){
 	return top;
 }
 
-NODE* dequeue(QUEUE *top){
-	if(top!=NULL){
-		QUEUE* temp=top;
-		top=top->next;
+NODE* dequeue(QUEUE **top){
+	if(*top!=NULL){
+		QUEUE* temp=*top;
+		*top=(*top)->next;
 		NODE* node=temp->node;
-		free(temp);
 		return node;
 	}
 	return NULL;
 }
 
 void qLevelOrder(NODE* root){
-	QUEUE* q=enqueue(q,root);
+	QUEUE* q=NULL;
+	q=enqueue(q,root);
 	while(q!=NULL){
-		NODE* temp=dequeue(top);
+		NODE* temp=dequeue(&q);
 		if(temp->left!=NULL)
-			top=enqueue(temp->left);
+			q=enqueue(q,temp->left);
 		if(temp->right!=NULL)
-			top=enqueue(temp->right);
+			q=enqueue(q,temp->right);
 		printf("\n%d",temp->data);
+		free(temp);
 	}
 }
 
@@ -119,5 +121,7 @@ void main(){
 	int pre[9]={1,2,4,8,9,5,3,6,7};
 	int post[9]={8,9,4,5,2,6,7,3,1};
 	NODE* root=createTree(pre,post,9);
-	levelOrder(root);
+//	levelOrder(root);
+	printf("\n");
+	qLevelOrder(root);
 }
