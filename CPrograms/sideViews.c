@@ -41,48 +41,58 @@ int height(NODE* root){
 	if(root==NULL)
 		return 0;
 
-	int lheight=height(root->left);
 	int rheight=height(root->right);
+	int lheight=height(root->left);
 
 	if(lheight>rheight)
 		return lheight+1;
-	else
-		return rheight+1;
+	return rheight+1;
 }
 
-void printLevelOrder(NODE* root, int level){
+void printLevelOrder(NODE* root,int level){
 	if(root==NULL)
 		return;
 	if(level==1)
 		printf(" %d",root->data);
 	else if(level>1){
-			printLevelOrder(root->left,level-1);
-			printLevelOrder(root->right,level-1);
+		printLevelOrder(root->left,level-1);
+		printLevelOrder(root->right,level-1);
 	}
 }
+
 
 void levelOrder(NODE* root){
 	int i,h=height(root);
-	for(i=1;i<=h;i++){
+	for(i=1;i<=h;i++)
 		printLevelOrder(root,i);
-	}
 }
-int maxlevel=0;
-void viewPrint(NODE* root,int level,int flag){
-	if(root==NULL)return;
-	if(maxlevel<level){
-		printf("%d ",root->data);
-		maxlevel=level;
-	}
-	if(flag==1){
-		viewPrint(root->left,level+1,flag);
-		viewPrint(root->right,level+1,flag);
-	}else if(flag==0){
-		viewPrint(root->right,level+1,flag);
-		viewPrint(root->left,level+1,flag);
+
+int maxLevel=0;
+
+void treeViewPrint(NODE* root,int level,int flag){
+	if(root==NULL)
+		return;
+	if(level>maxLevel){
+		printf(" %d",root->data);
+		maxLevel=level;
 	}
 
+	if(flag==1){
+		treeViewPrint(root->left,level+1,flag);
+		treeViewPrint(root->right,level+1,flag);
+	}
+	else{
+		treeViewPrint(root->right,level+1,flag);
+		treeViewPrint(root->left,level+1,flag);
+	}
 }
+
+
+
+void viewPrint(NODE* root,int flag){
+	treeViewPrint(root,1,flag);
+}
+
 
 void main(){
 	int pre[9]={1,2,4,8,9,5,3,6,7};
@@ -92,8 +102,8 @@ void main(){
 
 	levelOrder(root);
 	printf("\nLeft: ");
-	viewPrint(root,1,1);
+	viewPrint(root,1);
 	printf("\nRight: ");
-	maxlevel=0;
-	viewPrint(root,1,0);
+	maxLevel=0;
+	viewPrint(root,0);
 }

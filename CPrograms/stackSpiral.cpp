@@ -1,5 +1,6 @@
 #include<iostream>
 #include<stack>
+#include<queue>
 
 using namespace std;
 
@@ -78,7 +79,6 @@ void spiralPrint(NODE* root){
 		}
 	}
 }
-
 
 int main(){
 	int pre[9]={1,2,4,8,9,5,3,6,7};
