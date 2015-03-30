@@ -19,3 +19,12 @@ a[largest]=temp;
 if(i!=largest)
 heapify(a,largest);
 }
+
+int main(){
+  
+  int a[7]={12,1,10,20,13,11,4};
+  heapSize=7;
+  for(int i=heapSize/2;i>=0;i--)
+  heapify(a,i);
+  
+}
