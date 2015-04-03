@@ -33,7 +33,6 @@ cout<<"\nPrefix is: "<<prefix<<"\n Lengthof str: "<<prefix.length()<<"\nSize: "<
 int main(){
 	vector<string> v1;
 	int n;
-
 	cout<<"\nEnter number of string: ";
 	cin>>n;
 	for(int i=0;i<n;i++){
